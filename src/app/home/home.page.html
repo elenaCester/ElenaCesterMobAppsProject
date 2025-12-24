@@ -1,15 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title slot="start">
+      G00438792
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="heart"></ion-icon>
+      <ion-icon name="settings"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title slot="start">
-        G00438792
-      </ion-title>
-      <ion-buttons slot="end">
-        <ion-icon name="heart"></ion-icon>
-        <ion-icon name="settings"></ion-icon>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+ <ion-card *ngFor="let recipe of recipeData">
+   <img alt="Recipe image" src=""/>
+  <ion-card-header>
+    <ion-card-title>Card Title</ion-card-title>
+    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    Description of the card content.
+  </ion-card-content>
+ </ion-card>
+
 
   <div id="container">
     <strong>Ready to create an app?</strong>

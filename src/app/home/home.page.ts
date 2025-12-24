@@ -1,25 +1,20 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButtons } from '@ionic/angular/standalone';
+import { FormsModule } from '@angular/forms';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButtons, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle,IonCardContent } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { heart, settings } from 'ionicons/icons';
 import { SpoonacularApi } from '../services/spoonacular-api';
-import { HttpOptions } from '@capacitor/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButtons],
+  imports: [FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButtons, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle,IonCardContent],
 })
 export class HomePage {
 
-  ingredients: string = "lamb";
-  recipes: any[] = [];
-  /*
-  options: HttpOptions = {
-      url: "https://api.spoonacular.com/recipes/complexSearch"
-      //url: "https://api.spoonacular.com/recipes"
-  }*/
+  ingredients: string = "lamb,pea";
+  recipeData: any[] = [];
 
   constructor(private spoon:SpoonacularApi) { }
 
@@ -28,6 +23,8 @@ export class HomePage {
   }
 
   ngOnInit() {
+    //Initialise recipe data with an empty array
+    this.recipeData = [];
     //Add icons
     addIcons({ heart, settings });
     this.searchRecipes();
@@ -35,19 +32,13 @@ export class HomePage {
 
   searchRecipes() {
     this.spoon.getRecipes(this.ingredients).subscribe({
-    next: (result: any) => {
-      console.log(result);
-      this.recipes = result.results; // Spoonacular response format
-    },
-    error: (err) => {
-      console.error('API error:', err);
-    }
-  });
-    
-    /*let result = await this.spoon.getRecipes(this.ingredients);
-    console.log(result);*/
+      next: (result: any) => {
+        console.log(result);
+        this.recipeData = result.results; //Spoonacular API response JSON
+      },
+      error: (err) => {
+        console.error('API error:', err);
+      }
+    });
   }
-
-  
-
 }

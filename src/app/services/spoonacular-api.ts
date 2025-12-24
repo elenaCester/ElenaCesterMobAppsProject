@@ -20,16 +20,7 @@ export class SpoonacularApi {
   }
 
   //Method for getting the recipes in the Home Page
-  /*
   getRecipes(query: string): Observable<any> {
-    const params = new HttpParams()
-      .set("query", query)
-      .set("apiKey", this.apiKey);
-
-    return this.http.get(`${this.baseUrl}/complexSearch`, { params });
-  }*/
-
-  getRecipes(query: string) {
     const params = new HttpParams()
       .set("query", query)
       .set("apiKey", this.apiKey);
