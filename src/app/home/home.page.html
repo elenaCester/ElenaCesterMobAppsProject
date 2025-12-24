@@ -12,20 +12,14 @@
 
 <ion-content [fullscreen]="true">
  <ion-card *ngFor="let recipe of recipeData">
-   <img alt="Recipe image" src=""/>
+   <img alt="Recipe image" src="{{recipe.image}}"/>
   <ion-card-header>
-    <ion-card-title>Card Title</ion-card-title>
-    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+    <ion-card-title>{{recipe.title}}</ion-card-title>
+    <ion-card-subtitle>{{recipe.id}}</ion-card-subtitle>
   </ion-card-header>
 
   <ion-card-content>
-    Description of the card content.
+    Details button-to-be
   </ion-card-content>
  </ion-card>
-
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
 </ion-content>
