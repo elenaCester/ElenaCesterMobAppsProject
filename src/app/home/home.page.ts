@@ -33,9 +33,19 @@ export class HomePage {
     this.searchRecipes();
   }
 
-  async searchRecipes() {
-    let result = await this.spoon.getRecipes(this.ingredients);
-    console.log(result);
+  searchRecipes() {
+    this.spoon.getRecipes(this.ingredients).subscribe({
+    next: (result: any) => {
+      console.log(result);
+      this.recipes = result.results; // Spoonacular response format
+    },
+    error: (err) => {
+      console.error('API error:', err);
+    }
+  });
+    
+    /*let result = await this.spoon.getRecipes(this.ingredients);
+    console.log(result);*/
   }
 
   
