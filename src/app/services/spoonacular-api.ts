@@ -28,4 +28,13 @@ export class SpoonacularApi {
     return this.http.get(`${this.baseUrl}/complexSearch`, { params });
   }
 
+  //Method for getting the recipe detail in the Details Page
+  getRecipeDetails(recipeId: number): Observable<any> {
+    const params = new HttpParams()
+      .set("apiKey", this.apiKey);
+    
+    return this.http.get(`${this.baseUrl}/${recipeId}/information`, { params });
+      
+  }
+
 }
