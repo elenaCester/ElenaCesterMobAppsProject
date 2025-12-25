@@ -27,11 +27,15 @@
     </ion-card-content>
   </ion-card>
 
-  <h2>Instructions</h2>
-  <ol>
-    <li>{{recipe.analyzedInstructions[0].steps[0].step}}</li>
-  </ol>
-  <br>
+  <ng-container *ngIf="recipeData?.analyzedInstructions?.[0]?.steps?.length">
+    <h2>Instructions</h2>
+    <ol>
+      <li *ngFor="let step of recipeData.analyzedInstructions[0].steps">
+        {{step.step}}
+      </li>
+    </ol>
+  </ng-container>
+  
   <ion-button>
     <ion-icon name="heart"></ion-icon>
     ADD TO FAVOURITES
