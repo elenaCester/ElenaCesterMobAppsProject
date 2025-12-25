@@ -15,14 +15,14 @@ import { SpoonacularApi } from '../services/spoonacular-api';
 })
 export class RecipeDetailsPage implements OnInit {
 
-  recipeId: number = 716406;
-  recipeData: any[] = [];
+  recipeId: number = 649248;
+  recipeData: any = null;
 
   constructor(private spoon:SpoonacularApi) { }
 
   ngOnInit() {
-    //Initialise receipe details with an empty array
-    this.recipeData = [];
+    //Initialise receipe details with an empty object
+    this.recipeData = null;
     //Add icons
     addIcons({ heart });
 

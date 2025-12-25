@@ -8,23 +8,28 @@
 
 <ion-content [fullscreen]="true">
 
-  <h1><b>Recipe Title</b></h1>
+  <h1><b>{{recipeData.title}}</b></h1>
+  <img alt="Recipe image" src="{{recipeData.image}}">
+  <ul>
+    <li>Preparation time: {{recipeData.readyInMinutes}} minutes</li>
+    <li>Servings: {{recipeData.servings}}</li>
+  </ul>
   <h2>Ingredients</h2>
 
   <ion-card>
     <ion-card-header>
-      <img alt="Ingredient image" src=""/>
+      <img alt="Ingredient image" src="{{recipeData.extendedIngredients[0].image}}"/>
     </ion-card-header>
-
     <ion-card-content>
-      <h2>This will be each ingredient</h2>
-      <p><i>Measurement</i></p>
+      <h2>{{recipeData.extendedIngredients[0].original}}</h2>
+      <p><i>{{recipeData.extendedIngredients[0].measures.metric.amount}} 
+        {{recipeData.extendedIngredients[0].measures.metric.unitLong}}</i></p>
     </ion-card-content>
   </ion-card>
 
   <h2>Instructions</h2>
   <ol>
-    <li>Each instruction</li>
+    <li>{{recipe.analyzedInstructions[0].steps[0].step}}</li>
   </ol>
   <br>
   <ion-button>
