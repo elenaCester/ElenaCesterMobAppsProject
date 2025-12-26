@@ -25,9 +25,9 @@
     <img alt="Recipe image" src="{{recipe.image}}"/>
     <ion-card-header>
       <ion-card-title>{{recipe.title}}</ion-card-title>
-      <!-- Display custom text if pecific values equal true -->
+      <!-- Display custom text and icon if pecific values equal true -->
       <ion-card-subtitle>
-        <ion-icon name="sparkles"></ion-icon>
+        <ion-icon *ngIf="recipe.veryPopular" name="sparkles"></ion-icon>
         {{recipe.veryPopular ? "Popular!" : ""}}
       </ion-card-subtitle>
     </ion-card-header>
