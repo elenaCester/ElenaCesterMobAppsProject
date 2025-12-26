@@ -7,17 +7,22 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <h1><b>{{recipeData.title}}</b></h1>
-  <img alt="Recipe image" src="{{recipeData.image}}">
-  <ul>
-    <li>Preparation time: {{recipeData.readyInMinutes}} minutes</li>
-    <li>Servings: {{recipeData.servings}}</li>
-  </ul>
+  <!-- Added ngIf condition to make sure the recipe Id is loaded when loading the page -->
+  <ng-container *ngIf="recipeData">
+    <h1><b>{{recipeData.title}}</b></h1>
+    <img alt="Recipe image" src="{{recipeData.image}}">
+    <ul>
+      <li>Preparation time: {{recipeData.readyInMinutes}} minutes</li>
+      <li>Servings: {{recipeData.servings}}</li>
+    </ul>
+  </ng-container>
 
   <ion-button>
     <ion-icon name="heart"></ion-icon>
       ADD TO FAVOURITES
+  </ion-button>
+  <ion-button (click)="goHome()">
+      HOME
   </ion-button>
 
   <h2>Ingredients</h2>
@@ -47,5 +52,10 @@
       </li>
     </ol>
   </ng-container>
+
+  <br>
+  <hr>
+  <hr>
+  <br>
 
 </ion-content>

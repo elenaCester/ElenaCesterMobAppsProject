@@ -5,6 +5,8 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButtons, IonCa
 import { addIcons } from 'ionicons';
 import { heart } from 'ionicons/icons';
 import { SpoonacularApi } from '../services/spoonacular-api';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-details',
@@ -15,10 +17,13 @@ import { SpoonacularApi } from '../services/spoonacular-api';
 })
 export class RecipeDetailsPage implements OnInit {
 
-  recipeId: number = 649248;
+  recipeId!: number;
   recipeData: any = null;
 
-  constructor(private spoon:SpoonacularApi) { }
+  constructor(private spoon:SpoonacularApi,
+    private router: Router,
+    //route injected from the home page
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     //Initialise receipe details with an empty object
@@ -26,7 +31,13 @@ export class RecipeDetailsPage implements OnInit {
     //Add icons
     addIcons({ heart });
 
-    this.showRecipeDetails(this.recipeId);
+    //Get recipe details using the param from the selected recipe in home page
+    this.route.queryParams.subscribe(params => {
+      this.recipeId = +params["id"]; //to convert the string query into a number
+      if (this.recipeId) {
+        this.showRecipeDetails(this.recipeId);
+      }
+    });
   }
 
   showRecipeDetails(recipeId: number) {
@@ -39,5 +50,9 @@ export class RecipeDetailsPage implements OnInit {
     });
 
   }
+
+  goHome() {
+      this.router.navigate(['/home']);
+    }
 
 }

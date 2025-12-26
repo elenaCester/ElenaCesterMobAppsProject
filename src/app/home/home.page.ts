@@ -6,19 +6,22 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButtons, IonCa
 import { addIcons } from 'ionicons';
 import { heart, settings } from 'ionicons/icons';
 import { SpoonacularApi } from '../services/spoonacular-api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [FormsModule, CommonModule, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButtons, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle,IonCardContent, IonButton],
+  imports: [ FormsModule, CommonModule, IonSearchbar, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonButtons, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle,IonCardContent, IonButton],
 })
 export class HomePage {
 
   ingredients: string = "lamb,pea";
   recipeData: any[] = [];
 
-  constructor(private spoon:SpoonacularApi) { }
+  constructor(private spoon:SpoonacularApi,
+    //Added router to direct to the recipe details page
+    private router: Router) { }
 
   updateIngredients(value: string) {
     this.ingredients= value;
@@ -42,5 +45,10 @@ export class HomePage {
         console.error('API error:', err);
       }
     });
+  }
+
+  //Method to go from home page to details page, taking the recipe Id as a parameter
+  loadRecipeDetails(recipeId: number) {
+    this.router.navigate(['/recipe-details'], { queryParams: {id: recipeId}});
   }
 }
