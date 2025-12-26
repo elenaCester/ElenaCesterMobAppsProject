@@ -21,6 +21,7 @@ export class RecipeDetailsPage implements OnInit {
   recipeData: any = null;
 
   constructor(private spoon:SpoonacularApi,
+    //router to direct back to home page
     private router: Router,
     //route injected from the home page
     private route: ActivatedRoute) { }

@@ -25,7 +25,8 @@ export class SpoonacularApi {
       .set("query", query)
       .set("apiKey", this.apiKey);
 
-    return this.http.get(`${this.baseUrl}/complexSearch`, { params });
+    //Added an extra query in order to get info about the recipes being popular as well
+    return this.http.get(`${this.baseUrl}/complexSearch?addRecipeInformation=true`, { params });
   }
 
   //Method for getting the recipe detail in the Details Page

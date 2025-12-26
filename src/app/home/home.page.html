@@ -12,13 +12,24 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-searchbar placeholder="Enter ingredients separated by a comma"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="ingredients" placeholder="Enter ingredients separated by a comma"></ion-searchbar>
+  <ion-button (click)="searchRecipes()">Search</ion-button>
+  <h2>Not sure what you're looking for?</h2>
+  <p><i>Take a peek through the options below</i></p>
+  <br>
+  <ion-button (click)="searchPopularRecipes()">Most popular</ion-button>
+  <ion-button (click)="searchVegan()">Vegan</ion-button>
+  <ion-button (click)="searchGlutenFree()">Gluten free</ion-button>
 
   <ion-card *ngFor="let recipe of recipeData">
     <img alt="Recipe image" src="{{recipe.image}}"/>
     <ion-card-header>
       <ion-card-title>{{recipe.title}}</ion-card-title>
-      <ion-card-subtitle>{{recipe.id}}</ion-card-subtitle>
+      <!-- Display custom text if pecific values equal true -->
+      <ion-card-subtitle>
+        <ion-icon name="sparkles"></ion-icon>
+        {{recipe.veryPopular ? "Popular!" : ""}}
+      </ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
