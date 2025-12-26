@@ -14,19 +14,31 @@
     <li>Preparation time: {{recipeData.readyInMinutes}} minutes</li>
     <li>Servings: {{recipeData.servings}}</li>
   </ul>
+
+  <ion-button>
+    <ion-icon name="heart"></ion-icon>
+      ADD TO FAVOURITES
+  </ion-button>
+
   <h2>Ingredients</h2>
 
-  <ion-card>
-    <ion-card-header>
-      <img alt="Ingredient image" src="{{recipeData.extendedIngredients[0].image}}"/>
-    </ion-card-header>
-    <ion-card-content>
-      <h2>{{recipeData.extendedIngredients[0].original}}</h2>
-      <p><i>{{recipeData.extendedIngredients[0].measures.metric.amount}} 
-        {{recipeData.extendedIngredients[0].measures.metric.unitLong}}</i></p>
-    </ion-card-content>
-  </ion-card>
+  <!-- Added the ngIf condition in order to avoid the app to crash if the ingredients list is null -->
+  <ng-container *ngIf="recipeData?.extendedIngredients?.length">
+    <ion-card *ngFor="let ingredient of recipeData.extendedIngredients">
+      <ion-card-header>
+        <img alt="{{ingredient.name}}"
+          src="https://spoonacular.com/cdn/ingredients_100x100/{{ingredient.image}}"
+          style="width: 50px; height: 50px";/>
+        </ion-card-header>
+      <ion-card-content>
+        <h2>{{ingredient.original}}</h2>
+        <p><i>{{ingredient.measures.metric.amount}} 
+          {{ingredient.measures.metric.unitLong}}</i></p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
 
+  <!-- Added the ngIf condition in order to avoid the app to crash if the steps list is null -->
   <ng-container *ngIf="recipeData?.analyzedInstructions?.[0]?.steps?.length">
     <h2>Instructions</h2>
     <ol>
@@ -35,9 +47,5 @@
       </li>
     </ol>
   </ng-container>
-  
-  <ion-button>
-    <ion-icon name="heart"></ion-icon>
-    ADD TO FAVOURITES
-  </ion-button>
+
 </ion-content>
