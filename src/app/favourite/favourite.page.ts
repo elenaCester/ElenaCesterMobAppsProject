@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { DataStorage } from '../services/data-storage';
 
 @Component({
   selector: 'app-favourite',
@@ -12,9 +13,17 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 })
 export class FavouritePage implements OnInit {
 
-  constructor() { }
+  constructor(private storage:DataStorage) { }
 
   ngOnInit() {
+  }
+
+  async getRecipes() {
+    try {
+      let data = await this.storage.get("recipes");
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 }

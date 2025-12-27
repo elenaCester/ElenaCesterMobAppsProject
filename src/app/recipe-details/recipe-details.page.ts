@@ -7,6 +7,7 @@ import { heart } from 'ionicons/icons';
 import { SpoonacularApi } from '../services/spoonacular-api';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { DataStorage } from '../services/data-storage';
 
 @Component({
   selector: 'app-recipe-details',
@@ -24,7 +25,10 @@ export class RecipeDetailsPage implements OnInit {
     //router to direct back to home page
     private router: Router,
     //route injected from the home page
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    //to access storage
+    private storage: DataStorage
+  ) { }
 
   ngOnInit() {
     //Initialise receipe details with an empty object
@@ -53,7 +57,31 @@ export class RecipeDetailsPage implements OnInit {
   }
 
   goHome() {
-      this.router.navigate(['/home']);
+    this.router.navigate(['/home']);
+  }
+
+  async addToFavourites() {
+    if(!this.recipeData) return; //check to stop the app from crashing if there's no data returned
+
+    const favouriteRecipe = {
+      id: this.recipeData.id,
+      title: this.recipeData.title,
+      image: this.recipeData.image,
+      readyInMinutes: this.recipeData.readyInMinutes,
+      servings: this.recipeData.servings
     }
+
+    //getting existing favourites array
+    const favourites = (await this.storage.get("favourites")) || [];
+
+    //preventing saving the same recipe twice
+    //checks if at least one item matches the id of an already saved recipe
+    const favExists = favourites.some((recipe: any) => recipe.id === favouriteRecipe.id);
+    if (favExists) return;
+
+    //adding new favourite if it doesn't already exist
+    favourites.push(favouriteRecipe);
+    await this.storage.set("favourites", favourites)
+  }
 
 }
