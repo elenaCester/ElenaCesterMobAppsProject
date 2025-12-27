@@ -1,13 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>favourite</ion-title>
+    <ion-title>My Favourite Recipes</ion-title>
+    <ion-buttons (click)="goToHomePage()" slot="end">
+      <ion-icon name="home"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">favourite</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-card *ngFor="let recipe of storedRecipes">
+      <img alt="Recipe image" src="{{recipe.image}}"/>
+      <ion-card-header>
+        <ion-card-title>{{recipe.title}}</ion-card-title>
+      </ion-card-header>
+
+       <ion-card-content>
+        <p>Preparation time: {{recipe.readyInMinutes}}</p>
+        <p>Servings: {{recipe.servings}}</p>
+
+        <!-- <ion-button (click)="loadRecipeDetails(recipe.id)">Details</ion-button> -->
+          
+        <ion-button>Details</ion-button>
+        
+      </ion-card-content>
+    </ion-card>
+  </ion-toolbar>
 </ion-content>

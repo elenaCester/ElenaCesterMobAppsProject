@@ -82,9 +82,13 @@ export class HomePage {
     });
   }
 
+  goToFavPage() {
+    this.router.navigate(["/favourite"]);
+  }
+
   //Method to go from home page to details page, taking the recipe Id as a parameter
   loadRecipeDetails(recipeId: number) {
-    this.router.navigate(['/recipe-details'], { queryParams: {id: recipeId}});
+    this.router.navigate(["/recipe-details"], { queryParams: {id: recipeId}});
   }
 
 }
