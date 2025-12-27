@@ -6,6 +6,8 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 //Added import here because the HttpClient must be provided globally 
 import { provideHttpClient } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { importProvidersFrom } from '@angular/core';
 
 
 bootstrapApplication(AppComponent, {
@@ -14,5 +16,6 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
+    importProvidersFrom(IonicStorageModule.forRoot())
   ],
 });

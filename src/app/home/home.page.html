@@ -12,8 +12,11 @@
 
 <ion-content [fullscreen]="true">
 
+  <h2>What ingredients do you have handy?</h2>
+  <p><i>We'll suggest recipes based on them!</i></p>
   <ion-searchbar [(ngModel)]="ingredients" placeholder="Enter ingredients separated by a comma"></ion-searchbar>
   <ion-button (click)="searchRecipes()">Search</ion-button>
+
   <h2>Not sure what you're looking for?</h2>
   <p><i>Take a peek through the options below</i></p>
   <br>
