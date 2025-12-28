@@ -12,7 +12,7 @@
 
   <ion-radio-group
     [allowEmptySelection]="false"
-    value="measurementUnit"
+    [value]="measurementUnit"
     (ionChange)="saveMeasurementUnit($event.detail.value)"
   >
     <ion-radio value="metric">Metric</ion-radio><br />

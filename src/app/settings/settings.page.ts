@@ -44,7 +44,7 @@ export class SettingsPage implements OnInit {
 
   async saveMeasurementUnit(unit: "metric" | "imperial") {
     this.measurementUnit = unit;
-    await this.storage.set("measurementUnit", "unit");
+    await this.storage.set("measurementUnit", unit);
   }
 
 }
