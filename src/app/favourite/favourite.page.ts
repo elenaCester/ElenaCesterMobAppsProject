@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonButtons } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { home } from 'ionicons/icons';
+import { home, settings } from 'ionicons/icons';
 import { DataStorage } from '../services/data-storage';
 import { Router } from '@angular/router';
 
@@ -23,7 +23,7 @@ export class FavouritePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    addIcons({ home });
+    addIcons({ home, settings });
     this.getFavRecipes();
   }
 
@@ -41,6 +41,10 @@ export class FavouritePage implements OnInit {
 
   goToHomePage() {
     this.router.navigate(["/home"]);
+  }
+
+  goToSettingsPage() {
+    this.router.navigate(["/settings"]);
   }
 
   //Method to go from favourite page to details page, taking the recipe Id as a parameter

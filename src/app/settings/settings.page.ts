@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonIcon, IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { home } from 'ionicons/icons';
+import { home, heart } from 'ionicons/icons';
 import { Router } from '@angular/router';
 import { DataStorage } from '../services/data-storage';
 
@@ -24,12 +24,16 @@ export class SettingsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    addIcons({ home });
+    addIcons({ home, heart });
     this.getMeasurementUnit();
   }
 
   goToHomePage() {
     this.router.navigate(["/home"]);
+  }
+
+  goToFavPage() {
+    this.router.navigate(["/favourite"]);
   }
 
   //Retrieve the selected measurement unit from storage and assign its value to the variable
