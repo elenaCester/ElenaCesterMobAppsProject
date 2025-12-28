@@ -37,8 +37,9 @@
         </ion-card-header>
       <ion-card-content>
         <h2>{{ingredient.original}}</h2>
-        <p><i>{{ingredient.measures.metric.amount}} 
-          {{ingredient.measures.metric.unitLong}}</i></p>
+        <p><i>
+          {{measurementUnit === "metric" ? ingredient.measures.metric.amount: ingredient.measures.us.amount}} 
+          {{measurementUnit === "metric" ? ingredient.measures.metric.unitLong: ingredient.measures.us.unitLong}}</i></p>
       </ion-card-content>
     </ion-card>
   </ng-container>

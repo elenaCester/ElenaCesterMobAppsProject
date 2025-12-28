@@ -21,6 +21,8 @@ export class RecipeDetailsPage implements OnInit {
   recipeId!: number;
   recipeData: any = null;
   isFavourite!: boolean;
+  //Set metric as default
+  measurementUnit: "metric" | "imperial" = "metric";
 
   constructor(private spoon:SpoonacularApi,
     //router to direct back to home page
@@ -56,6 +58,8 @@ export class RecipeDetailsPage implements OnInit {
       next: async (result) => {
         console.log(result);
         this.recipeData = result
+        //Check what measurement unit should be displayed
+        await this.getMeasurementUnit();
         //Check if the recipe is already saved as favourite
         await this.isFavRecipe();
       },
@@ -100,6 +104,12 @@ export class RecipeDetailsPage implements OnInit {
     }
 
     await this.storage.set("favourites", favourites);
+  }
+
+  //Retrieving saved unit defaulting to metric if no unit has been selected yet
+  async getMeasurementUnit() {
+    const unit = await this.storage.get("measurementUnit");
+    this.measurementUnit = unit ?? "metric";
   }
 
 }
