@@ -19,9 +19,11 @@ export class HomePage {
   ingredients: string = "";
   recipeData: any[] = [];
 
-  constructor(private spoon:SpoonacularApi,
-    //Added router to direct to the recipe details page
-    private router: Router) { }
+  constructor(
+    private spoon:SpoonacularApi,
+    //Added router to direct to the details / favourites page
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     //Initialise recipe data with an empty array

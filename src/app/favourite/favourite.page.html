@@ -18,10 +18,8 @@
        <ion-card-content>
         <p>Preparation time: {{recipe.readyInMinutes}}</p>
         <p>Servings: {{recipe.servings}}</p>
-
-        <!-- <ion-button (click)="loadRecipeDetails(recipe.id)">Details</ion-button> -->
           
-        <ion-button>Details</ion-button>
+        <ion-button (click)="loadRecipeDetails(recipe.id)">Details</ion-button>
         
       </ion-card-content>
     </ion-card>

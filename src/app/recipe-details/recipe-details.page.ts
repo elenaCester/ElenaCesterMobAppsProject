@@ -20,6 +20,7 @@ export class RecipeDetailsPage implements OnInit {
 
   recipeId!: number;
   recipeData: any = null;
+  isFavourite!: boolean;
 
   constructor(private spoon:SpoonacularApi,
     //router to direct back to home page
@@ -33,6 +34,7 @@ export class RecipeDetailsPage implements OnInit {
   ngOnInit() {
     //Initialise receipe details with an empty object
     this.recipeData = null;
+    
     //Add icons
     addIcons({ heart });
 
@@ -45,43 +47,59 @@ export class RecipeDetailsPage implements OnInit {
     });
   }
 
+  goHome() {
+    this.router.navigate(['/home']);
+  }
+
   showRecipeDetails(recipeId: number) {
     this.spoon.getRecipeDetails(recipeId).subscribe({
-      next: (result) => {
+      next: async (result) => {
         console.log(result);
         this.recipeData = result
+        //Check if the recipe is already saved as favourite
+        await this.isFavRecipe();
       },
       error: (error) => console.error('Spoonacular error', error)
     });
 
   }
 
-  goHome() {
-    this.router.navigate(['/home']);
+  async isFavRecipe() {
+    const favourites = (await this.storage.get("favourites")) || [];
+    this.isFavourite = favourites.some(
+      (recipe: any) => recipe.id === this.recipeData.id
+    );
   }
 
-  async addToFavourites() {
-    if(!this.recipeData) return; //check to stop the app from crashing if there's no data returned
+  async addOrRemoveFavourites() {
+    if(!this.recipeData) return;
 
-    const favouriteRecipe = {
-      id: this.recipeData.id,
-      title: this.recipeData.title,
-      image: this.recipeData.image,
-      readyInMinutes: this.recipeData.readyInMinutes,
-      servings: this.recipeData.servings
-    }
-
-    //getting existing favourites array
     const favourites = (await this.storage.get("favourites")) || [];
 
-    //preventing saving the same recipe twice
-    //checks if at least one item matches the id of an already saved recipe
-    const favExists = favourites.some((recipe: any) => recipe.id === favouriteRecipe.id);
-    if (favExists) return;
+    const index = favourites.findIndex(
+      (recipe: any) => recipe.id === this.recipeData.id
+    );
 
-    //adding new favourite if it doesn't already exist
-    favourites.push(favouriteRecipe);
-    await this.storage.set("favourites", favourites)
+    if (index > -1) {
+      //Remove recipe from storage
+      favourites.splice(index, 1);
+      this.isFavourite = false;
+
+    } else {
+      //Add recipe to storage
+      const favouriteRecipe = {
+        id: this.recipeData.id,
+        title: this.recipeData.title,
+        image: this.recipeData.image,
+        readyInMinutes: this.recipeData.readyInMinutes,
+        servings: this.recipeData.servings
+      }
+
+      favourites.push(favouriteRecipe);
+      this.isFavourite = true;
+    }
+
+    await this.storage.set("favourites", favourites);
   }
 
 }

@@ -17,12 +17,12 @@
     </ul>
   </ng-container>
 
-  <ion-button (click)="addToFavourites()">
+  <ion-button (click)="addOrRemoveFavourites()">
     <ion-icon name="heart"></ion-icon>
-      ADD TO FAVOURITES
+      {{ isFavourite ? "Remove from favourites" : "Add to favourites"}}
   </ion-button>
   <ion-button (click)="goHome()">
-      HOME
+      Home
   </ion-button>
 
   <h2>Ingredients</h2>
